@@ -281,19 +281,144 @@ import Foundation
 //}
 //
 //sol 2)
-var dic: [Int: Int] = [1:800, 2:500, 3:1500]
-print("금액을 입력하세요.")
-var money = Int(readLine()!)!
-print("메뉴를 고르세요.")
-print("1.콜라(800), 2.생수(500원) 3.비타민워터(1500) : ",terminator: " ")
-var num = Int(readLine()!)!
-var value = dic[num]!
-if money > value {
-    var thousand = (money - value)/1000
-    var five = (money - value - thousand*1000)/500
-    var one = (money - value - thousand*1000 - five*500)/100
-    print("잔돈: \(money - value)")
-    print("천원: \(thousand)개 오백원: \(five)개 백원 : \(one)개")
-} else {
-    print("돈이 \(value - money)모자랍니다.")
-}
+//var dic: [Int: Int] = [1:800, 2:500, 3:1500]
+//print("금액을 입력하세요.")
+//var money = Int(readLine()!)!
+//print("메뉴를 고르세요.")
+//print("1.콜라(800), 2.생수(500원) 3.비타민워터(1500) : ",terminator: " ")
+//var num = Int(readLine()!)!
+//var value = dic[num]!
+//if money > value {
+//    var thousand = (money - value)/1000
+//    var five = (money - value - thousand*1000)/500
+//    var one = (money - value - thousand*1000 - five*500)/100
+//    print("잔돈: \(money - value)")
+//    print("천원: \(thousand)개 오백원: \(five)개 백원 : \(one)개")
+//} else {
+//    print("돈이 \(value - money)모자랍니다.")
+//}
+
+
+//while 예제 1
+//while문을 사용하여 키보드로부터 입력 받은 수가 10보다 작을 때만 계속 정수를 입력 받으세요.
+//print("정수 입력: ", terminator: " ")
+//var number = Int(readLine()!)!
+//
+//while number < 10 {
+//    print("정수 입력: ", terminator: " ")
+//    number = Int(readLine()!)!
+//}
+//print("종료되었습니다.")
+
+
+//while 예제 2
+//다이어트 관리 프로그램
+//현재 몸무게와 목표몸무게를 입력 받고 주차 별 감량 몸무게를 입력 받으세요.
+//목표 몸무게를 달성하면 축하한다는 문구를 출력 하고 입력을 멈추세요!
+
+//print("현재 몸무게: ", terminator: " ")
+//var now = Int(readLine()!)!
+//print("목표 몸무게: ", terminator: " ")
+//var goal = Int(readLine()!)!
+//var num = 1
+//
+//while now > goal {
+//    print("\(num)주차 감량 몸무게:", terminator: " ")
+//    var number = Int(readLine()!)!
+//    now -= number
+//    num += 1
+//}
+//print("\(now)kg 달성! 축하합니다!")
+
+//while 예제 3
+//Login프로그램
+//로그인 프로그램을 만들어 보자.
+//아이디와 비밀번호를 각각 입력 받고 일치할 경우 “로그인성공!”
+//일치하지 않은 경우에는 “로그인 실패!”
+//let userID = "Hello"
+//let password = 1234
+//
+//print("아이디를 입력해 주세요: ", terminator: " ")
+//var ID = readLine()!
+//print("비밀번호를 입력해 주세요: ", terminator: " ")
+//var pw = Int(readLine()!)!
+//
+//while userID != ID || password != pw {
+//    print("아이디와 비밀번호가 잘못되었습니다.")
+//    print("아이디를 입력해 주세요: ", terminator: " ")
+//    ID = readLine()!
+//    print("비밀번호를 입력해 주세요: ", terminator: " ")
+//    pw = Int(readLine()!)!
+//}
+//print("로그인 성공!")
+
+
+//while 예제 4
+//Login프로그램
+//아이디와 비밀번호가 틀렸을 경우 "계속 하시겠습니까?" 라는 문장을 출력하세요.
+//Y를 입력하면 아이디 비밀번호 입력 계속,
+//N을 입력하면 종료/로그인 성공 시 종료
+
+//let userID = "Hello"
+//let password = 1234
+//var bool = "T"
+//
+//print("아이디를 입력해 주세요: ", terminator: " ")
+//var ID = readLine()!
+//print("비밀번호를 입력해 주세요: ", terminator: " ")
+//var pw = Int(readLine()!)!
+//
+//while userID != ID || password != pw {
+//    print("아이디와 비밀번호가 잘못되었습니다.")
+//    print("계속 이어서 하시겠습니까? (Y/N)")
+//    var answer = readLine()!
+//    if answer == "Y" {
+//        print("아이디를 입력해 주세요: ", terminator: " ")
+//        ID = readLine()!
+//        print("비밀번호를 입력해 주세요: ", terminator: " ")
+//        pw = Int(readLine()!)!
+//    } else {
+//        print("종료되었습니다.")
+//        bool = "F"
+//        break
+//    }
+//}
+//if bool == "T" {
+//    print("로그인 성공!")
+//}
+
+
+//while 예제 6
+//(+, -) 계산기프로그램
+//아이디와 비밀번호가 틀렸을 경우 "계속 하시겠습니까?" 라는 문장을 출력하세요.
+//첫 번째 정수를 입력 받는다.
+//두 번째 정수를 입력 받는다.
+//연산자를 선택한다.
+//선택한 연산자에 따라 연산결과를 출력한다.
+//다시 실행할 것인가를 물어본다.
+//“Y” 를 입력하면 다시 실행.
+//“N”을 입력하면 반복문 종료.
+
+
+//var bool = "T"
+//while bool == "T"{
+//    print("첫 번째 정수를 입력하세요: ", terminator: " ")
+//    var one = Int(readLine()!)!
+//    print("두 번째 정수를 입력하세요: ", terminator: " ")
+//    var two = Int(readLine()!)!
+//    print("1.더하기 2.빼기: ", terminator: " ")
+//    var check = readLine()!
+//    if check == "1" {
+//        print("더하기 연산 결과는 \(one + two)")
+//    } else {
+//        print("뻬기 연산 결과는 \(one - two)")
+//    }
+//    print("계속 이어서 하시겠습니까? (Y/N)")
+//    var answer = readLine()!
+//    if answer == "Y" {
+//        continue
+//    } else if answer == "N" {
+//        print("종료되었습니다.")
+//        break
+//    }
+//}
