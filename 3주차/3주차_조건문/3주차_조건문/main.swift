@@ -242,3 +242,24 @@ import Foundation
 //    print("\n")
 //    }
 //}
+
+//for 예제10
+//369게임
+//0부터 99까지 3,6,9일 때 *를 붙힌 값을 보여주세요
+//333***
+
+func is369(cnt: Int) -> String {
+    let a = cnt / 10
+    let b = cnt % 10
+    let str: String = (b % 3 == 0) && (b != 0) ? "*" : ""
+    if a == 0 {
+        return str
+    }
+    print(str)
+    return str + is369(cnt: a)
+}
+
+for i in 0..<10 {
+    print( i, is369(cnt: i))
+}
+
