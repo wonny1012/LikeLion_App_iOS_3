@@ -58,7 +58,7 @@ import Foundation
 //    }
 //    print("10에 가까운 수: \(result)")
 //}
-//
+
 //close10(a: 2, b: 7)
 //close10(a: -5, b: -1)
 //close10(a: 13, b: 2)
@@ -132,3 +132,105 @@ import Foundation
 //getDivisor(num: 10)
 //getDivisor(num: 16)
 //getDivisor(num: 24)
+
+//함수 예제 8
+//약수의 합을 구하여 반환하는 getSumOfDivisors() 를 구현하세요
+
+//func getSumOfDivisors(num: Int) -> Int {
+//    var result = 0
+//    print("\(num)의 약수의 합: ", terminator: "")
+//    for i in 1...num {
+//        if num % i == 0 {
+//            result += i
+//
+//        }
+//    }
+//    return result
+//}
+//
+//var answer = getSumOfDivisors(num:18)
+//print(answer)
+
+//sol 2
+//
+//func isDivide (a: Int, b:Int) -> Bool {
+//    var answer: Bool = false
+//    if a % b == 0 {
+//        answer = true
+//    }
+//    return answer
+//}
+//
+//func getSumOfDivisors (a: Int) -> Int {
+//    var sum = 0
+//    for i in 1...a{
+//        if isDivide(a: a, b: i) {
+//            sum += i
+//        }
+//    }
+//    return sum
+//}
+//
+//
+//var str = ""
+//
+//for num in 2...1000{
+//    let c = getSumOfDivisors(a: num)
+//    if(c - num) == num {
+//        str += "\(num) "
+//    }
+//}
+//
+//print(str)
+
+
+//함수 예제 9
+//startValue...endValue까지의 숫자 중 완전수를 출력하는 getPerfectNumber() 를 구현하세요
+//2~1000까지의 완전수: 6 28 496
+
+//func getPerfectNumber(first: Int, last: Int) {
+//    print("\(first)~\(last)까지의 완전수 :" ,terminator: "")
+//    for i in first...last {
+//        var result = 0
+//        for j in 1...i {
+//            if i % j == 0 {
+//                result += j
+//            }
+//        }
+//
+//        if result - i == i {
+//            print(i, terminator: " ")
+//        }
+//    }
+//}
+//
+//getPerfectNumber(first: 2, last: 1000)
+
+//함수 예제 10
+//startValue~endValue까지의 숫자 중 소수를 출력하는 getPrimeNumber() 를 구현하세요
+//2~30까지의 소수: 2 3 5 7 11 13 17 19 23 29
+//
+//func getPrimeNumber(first: Int, last: Int) {
+//    print("\(first)~\(last)까지의 소수: " ,terminator: "")
+//    for i in first...last {
+//        var result = "F"
+//        if i == 2 {
+//
+//        } else {
+//            for j in 2...(i-1) {
+//                if i % j == 0 {
+//                    result = "T"
+//                    break
+//                }
+//            }
+//        }
+//        if result == "F" {
+//            print(i, terminator: " ")
+//        }
+//    }
+//    print()
+//}
+//
+//getPrimeNumber(first: 2, last: 30)
+//
+
