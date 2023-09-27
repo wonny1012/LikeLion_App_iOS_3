@@ -11,6 +11,6 @@
     </tr>
     <tr align="center">
     <td>3주차</td>
-    <td> </td>
+    <td>반복문(for문), 함수, Class, 배열(Array)</td>
     </tr>
     
