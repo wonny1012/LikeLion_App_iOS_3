@@ -253,5 +253,63 @@ import Foundation
 //cal.setNum2(num2: 5)
 //cal.show()
 
+//Class 예제 06
+//다음 예시와 같이 출력되도록 TV 클래스를 작성하세요.
 
+//class TV {
+//    var name: String = ""
+//    var year: Int = 0
+//    var size: Int = 0
+//
+//    init(name: String, year: Int, size: Int) {
+//        self.name = name
+//        self.year = year
+//        self.size = size
+//    }
+//
+//    func show() {
+//        print("\(name)에서 만든 \(year)년형 \(size)인치 TV")
+//    }
+//}
+//
+//
+//let myTV = TV(name: "LG", year: 2023, size: 48)
+//print( myTV.show() )
 
+//class 예제 07
+//별 그리기를 class로 만들어 보세요
+
+class Shape {
+    var size: Int = 0
+    
+    init(size: Int) {
+        self.size = size
+    }
+    
+    private func printShape ( start: Int, end: Int, shape: String) -> String {
+        var result: String = ""
+        for _ in start...end {
+            result += shape
+        }
+        return result
+    }
+    
+    func drawShape() -> String {
+        var str = ""
+        for i in 1...size {
+            str += printShape(start: 1, end: i, shape: "*") + "\n"
+        }
+        return str
+    }
+    
+    func drawInvShape() -> String {
+        var str = "*"
+        for i in (1...size).reversed() {
+            str += printShape(start: 1, end: i, shape: "*") + "\n"
+        }
+        return str
+    }
+}
+
+let shape = Shape(size:5)
+print( shape.drawShape() + shape.drawInvShape() )
