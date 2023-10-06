@@ -440,7 +440,26 @@ import Foundation
 //
 //print(maxArray([1,4,3,6,2,8], currentIndex: 0))
 
+//### 재귀함수 예제 3
+//피보나치 수열
+//1) 일반 함수 구현
+//
+//func fib(_ n: Int) -> Int {
+//    var a = 1
+//    var b = 1
+//    if n == 1 || n == 2 {
+//        return 2
+//    } else {
+//        for _ in 1..<n {
+//            (a,b) = (b, a+b)
+//        }
+//    }
+//    return a
+//}
 
+//2) 재귀 함수 구현
+
+//sol 1
 //func Fibonacci(_ num:Int) -> Int {
 //    if num <= 0 {
 //        return 0
@@ -451,4 +470,92 @@ import Foundation
 //    }
 //}
 //
-//print(Fibonacci(10))
+//sol 2
+//func fib(_ n: Int) -> [Int] {
+//    var fibList = [1,1]
+//    if n == 1 || n == 2 {
+//        return fibList
+//    }
+//    for i in 2..<n {
+//        fibList.append(fibList[i-1] + fibList[i-2])
+//    }
+//    return fibList
+//}
+//
+//sol 3
+//func fib(_ n: Int) -> Int {
+//    return n <= 2 ? 1 : fib(n-1) + fib(n-2)
+//}
+//
+//let fib = { (_ n: Int) -> Int in
+//    return n <= 2 ? 1 : fib(n-1) + fib(n-2)
+//}
+//
+//sol 4
+// 클로저의 매게변수 타입과 반환 타입을 생략하여 표현
+//let fib = { (_ n) in
+//    n <= 2 ? 1 : fib(n-1) + fib(n-2)
+//}
+//
+//sol 5
+//let fib = { (_ n) in
+//    n <= 2 ? 1 : fib(n-1) + fib(n-2)
+//}
+//
+//sol 6
+//func fibs() -> AnyIterator<Int> {
+//    var a = 0
+//    var b = 1
+//    return AnyIterator {
+//        (a,b) = (b, a+b)
+//        return a
+//    }
+//}
+//let f = fibs()
+//f.next()
+//f.next()
+//f.next()
+//f.next()
+
+//#### 재귀함수 예제 4 (선택)
+//가로 1680m x 세로 640m 인 사각형을 똑같은 크기의 가장 큰 정사각형으로 나눌려고 한다. 정사각형의 크기는?
+
+//func divideSquare(x: Int, y: Int) -> Int {
+//    if x == 0 || y == 0 {
+//        return x + y
+//    }
+//    if x > y {
+//        print(x % y)
+//        return divideSquare(x: x % y, y: y)
+//    } else {
+//        return divideSquare(x: x, y: y  % x)
+//    }
+//}
+//
+//print(divideSquare(x: 1680, y: 640))
+
+
+//func quicksort(_ array: [Int]) -> [Int] {
+//    var left: [Int] = []
+//    var right: [Int] = []
+//    if left.count == 1 && right.count == 1 {
+//        return left + right
+//    } else {
+//        var center = Int(array.count/2)
+//        print(array[center-1])
+//        for i in array {
+//            if i > array[center-1] {
+//                right.append(i)
+//            } else if i < array[center-1]{
+//                left.append(i)
+//            }
+//        }
+//        left.append(array[center-1])
+//    }
+//    return quicksort(left) + quicksort(right)
+//}
+
+
+// print(quicksort([10,5,2,3]) ) // -> [2,3,5,10]
+//print(quicksort([6,5,1,4,7,2,3]) ) // -> [1,2,3,4,5,6,7]
+
