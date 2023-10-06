@@ -13,4 +13,8 @@
     <td>3주차</td>
     <td>반복문(for문), 함수, Class, 배열(Array)</td>
     </tr>
+    <tr align="center">
+    <td>2주차</td>
+    <td>재귀함수 자료구조(Stack,Queue), 알고리즘(이진,단순탐색 / 버블,선택,퀵정렬)</td>
+    </tr>
     
