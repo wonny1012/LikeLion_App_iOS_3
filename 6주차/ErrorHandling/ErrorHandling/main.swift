@@ -115,8 +115,7 @@ do {
 //  - amount가 잔액보다 크면 InsufficientBalance 에러를 발생시킨다.
 
 //enum ATMError: Error {
-//    case negativeAmount
-//    case insufficientBalance
+//    case negativeAmount, insufficientBalance
 //}
 //
 //class ATM {
@@ -143,7 +142,7 @@ do {
 //        }
 //    }
 //}
-//
+
 //let atm = ATM()
 //atm.deposit(amount: 1000)
 //print(atm.balance)
@@ -162,17 +161,21 @@ do {
 //
 //print(atm.balance)
 
+
+
+
+//
 enum CalculatorError: Error {
     case divisionByZero
 }
 
 struct Calculator {
     var result: Double = 0
-    
+
     mutating func add(_ number: Double) {
         result += number
     }
-    
+
     mutating func subtract(_ number: Double) {
         result -= number
     }
