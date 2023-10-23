@@ -10,13 +10,9 @@ import Foundation
 //#### 에러 핸들링 예제 01
 //
 //온도 변환 함수
-//
 //섭씨 온도를 화씨 온도로 변환하는 함수를 작성하세요.
-//
 //단, 섭씨 온도가 -273.15도보다 낮으면 InvalidTemperature 에러를 발생시키세요.
-//```
 //화씨 = 섭씨 * 1.8 + 32
-//```
 
 enum TemperatureError : Error {
     case invalidTemperature
@@ -27,8 +23,8 @@ func celsiusToFahrenheit(_ celsius: Double) throws -> Double {
         throw TemperatureError.invalidTemperature
     }
 
-    let fahrenheit = celsius*1.8 + 32
-    return fahrenheit
+    return celsius*1.8 + 32
+    
 }
 
 
@@ -38,8 +34,8 @@ do {
 } catch TemperatureError.invalidTemperature {
     print("Invalid temperature")
 }
-//// Invalid temperature
-//
+
+
 ////#### 에러 핸들링 예제 02
 ////비밀번호 검증 함수
 ////사용자가 입력한 비밀번호가 다음 조건을 만족하는지 검증하는 함수를 작성하세요.
@@ -60,18 +56,17 @@ enum PasswordError : Error {
 }
 
 func validatePassword(_ passWord: String) throws {
-//    var errorMessages: [String] = []
     
     guard passWord.count >= 8 else {
         throw PasswordError.tooShort
     }
-    if passWord.rangeOfCharacter(from: .uppercaseLetters) == nil {
+    if !passWord.contains(where: { $0.isUppercase }) {
         throw PasswordError.missingUppercase
     }
-    if passWord.rangeOfCharacter(from: .lowercaseLetters) == nil {
+    if !passWord.contains(where: { $0.isLowercase }) {
         throw PasswordError.missingLowercase
     }
-    if passWord.rangeOfCharacter(from: .decimalDigits) == nil {
+    if !passWord.contains(where: { $0.isNumber }){
         throw PasswordError.missingNumber
     }
     if passWord.contains(symbols) == false {
@@ -97,9 +92,7 @@ do {
         print("Password is missing a symbol")
     }
 }
-// Password is too short
-// Password is missing an uppercase letter
-// Password is missing a symbol
+
 
 //#### 에러 핸들링 예제 03
 //ATM 기계 클래스
@@ -162,9 +155,17 @@ do {
 //print(atm.balance)
 
 
+//#### 에러 핸들링 예제 04
+//계산기 구조체
+//사칙연산을 수행하는 계산기를 나타내는 구조체를 작성하세요.
+//다음 속성과 메서드를 구현하세요.
+//- result: 계산 결과를 나타내는 Double 타입의 속성. 초기값은 0이다.
+//- add(_ number: Double): result에 number를 더하는 메서드.
+//- subtract(_ number: Double): result에 number를 빼는 메서드.
+//- multiply(_ number: Double): result에 number를 곱하는 메서드.
+//- divide(_ number: Double) throws: result에 number를 나누는 메서드.
+//  - 단, number가 0이면 DivisionByZero 에러를 발생시킨다.
 
-
-//
 enum CalculatorError: Error {
     case divisionByZero
 }
