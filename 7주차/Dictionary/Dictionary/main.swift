@@ -141,10 +141,9 @@ print(result4)       // age:20,gender:female,name:Alice
 
 // 예시 코드
 func sumOfKeysAndValues(dict: [Int: Int]) -> (Int, Int) {
-//    var sumPuple:(Int,Int) = (0,0)
     var keySum = 0
     var valueSum = 0
-    for (key, value) in dict {
+    for (key, value) in dict5 {
         keySum += key
         valueSum += value
     }
@@ -175,3 +174,85 @@ let fruit = ["apple": 3, "banana": 5, "orange": 2]
 for (key, value) in fruit {
     print(key,value)
 }
+
+
+//#### 딕셔너리 예제 08
+//다음과 같은 딕셔너리가 주어졌을 때, 값이 가장 큰 스코어를 찾아서 출력하는 코드를 작성하세요.
+//값이 같은 스코어가 여러 개 있으면 아무거나 출력해도 됩니다.
+
+let scores = ["math": 90, "english": 85, "science": 95]
+
+var maxSubject = ""
+var maxScore = 0
+
+for ( subject, score ) in scores {
+    if score > maxScore {
+        maxScore = score
+        maxSubject = subject
+    }
+}
+
+print("가장 높은 점수는 \(maxSubject)과목의 \(maxScore)점입니다.")
+
+
+//#### 딕셔너리 예제 09
+//다음과 같은 딕셔너리가 주어졌을 때, 키와 값을 서로 바꾼 새로운 딕셔너리를 만드는 코드를 작성하세요.
+//(단, 기존의 딕셔너리는 변경하지 않는다.)
+let colors = ["red": "#FF0000", "green": "#00FF00", "blue": "#0000FF"]
+
+var newColors = [String : String]()
+
+for (k,v) in colors {
+    newColors[v] = k
+}
+
+print(newColors)
+
+
+//#### 딕셔너리 예제 10
+//다음과 같은 두 개의 딕셔너리가 주어졌을 때, 두 딕셔너리의 공통된 키의 키와 값을 출력하는 코드를 작성하세요.
+
+let dict01 = ["a": 1, "b": 2, "c": 3]
+let dict02 = ["b": 2, "c": 4, "d": 5]
+var result10 = [String: [Int]]()
+
+for (k1,v1) in dict01 {
+    for (k2,v2) in dict02 {
+        if k1 == k2 {
+            result10[k1] = [v1,v2]
+        }
+    }
+}
+print(result10)
+
+
+//#### 딕셔너리 예제 11
+//다음과 같은 딕셔너리가 주어졌을 때, 값이 짝수인 키와 값을 삭제하는 코드를 작성하세요.
+
+var even = ["a": 2, "b": 3, "c": 4, "d": 5]
+
+for (k,v) in even {
+    if v%2 == 0 {
+        even[k] = nil
+    }
+}
+
+print(even)
+
+
+//#### 딕셔너리 예제 12
+//다음과 같은 딕셔너리가 주어졌을 때, 키를 알파벳 순서로 정렬하여 출력하는 코드를 작성하세요.
+
+let countries = ["KR": "South Korea", "US": "United States", "JP": "Japan", "CN": "China"]
+
+let sortedCountris = countries.keys.sorted()
+
+
+for key in sortedCountris {
+    let value = countries[key]
+    print("\(key): \(value ?? "" )")
+}
+
+
+
+
