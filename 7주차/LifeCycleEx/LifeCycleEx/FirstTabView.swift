@@ -17,9 +17,7 @@ struct FirstTabView:View {
             .onDisappear(perform: {
                 print("onDisappeared triggered")
             })
-            .task(priority: TaskPrioirty.background) {
-                title = await changeTitle()
-            }
+            
     }
     func changeTitle() async -> String {
         sleep(5)

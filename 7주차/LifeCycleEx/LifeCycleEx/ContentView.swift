@@ -8,21 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var selectedColor: Color
+
     var body: some View {
-        TabView {
-            FirstTabView()
-                .tabItem {
-                    Image(systemName: "01.circle")
-                    Text("First")
+        NavigationView {
+            VStack {
+                NavigationLink(destination: ColorPickerView(selectedColor: $selectedColor)) {
+                    Text("Select Color")
                 }
+                Rectangle()
+                    .fill(selectedColor)
+                    .frame(width: 200, height: 200)
+                    .cornerRadius(10)
+                    .padding()
+            }
+            .navigationTitle("Theme Color App")
         }
-        
-    
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+
+
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView(selectedColor: Binding<Color>)
+//    }
+//}

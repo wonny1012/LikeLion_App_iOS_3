@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct LifeCycleExApp: App {
+    @AppStorage("selectedColor") var selectedColor: Color = Color.white
+    
+//    @AppStorage("KEY") var Name: Type = Value
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(selectedColor: $selectedColor)
         }
     }
 }
