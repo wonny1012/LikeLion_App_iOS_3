@@ -115,6 +115,9 @@ struct ContentView: View {
                     print(email,password)
                     
                     if isEmailValid && isPasswordValid {
+                        NavigationLink(destination: SuccessView(email: $email)) {
+                            
+                        }
                         print("로그인 성공")
                     } else {
                         //로그인 실패시 비밀번호만 리셋
@@ -150,6 +153,7 @@ struct ContentView: View {
             }
             .padding()
         }
+    }
     }
     
     //배경 색상 커스텀
