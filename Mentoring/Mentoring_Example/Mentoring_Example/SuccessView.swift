@@ -11,7 +11,7 @@ struct SuccessView: View {
     @Binding var email: String
     
     var body: some View {
-        Text("반갑습니다 오뜨님!")
+        Text("반갑습니다 \(email)님!")
     }
 }
 
