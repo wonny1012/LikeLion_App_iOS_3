@@ -25,7 +25,7 @@ struct ContentView: View {
     
     
     var body: some View {
-        
+        NavigationView {
         ZStack()
         {
             VStack {
@@ -36,7 +36,7 @@ struct ContentView: View {
                     .fill(customColor())
                     .edgesIgnoringSafeArea(.bottom)
             }
-                
+            
             VStack(alignment: .leading, spacing: 40)
             {
                 
