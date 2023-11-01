@@ -8,8 +8,27 @@
 import SwiftUI
 
 struct Example_2: View {
+    
+    @State var number = 0
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+              Text("Go to Second View")
+            NavigationLink(<#LocalizedStringKey#>, value: number)
+        }
+        .navigationTitle("FirstView")
+        .navigationDestination(isPresented:, destination: SecondView2)
+        
+    }
+}
+
+struct SecondView2: View {
+    @Binding var number: String
+    var body: some View {
+        VStack {
+            Text("Second View Contenct")
+            Text(number)
+        }
     }
 }
 
