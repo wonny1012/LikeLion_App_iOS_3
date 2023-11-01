@@ -13,6 +13,7 @@
 		0E7E468A2AF00C0600446561 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7E46892AF00C0600446561 /* Preview Assets.xcassets */; };
 		0E7E46912AF03D6D00446561 /* PasswordStrongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E46902AF03D6D00446561 /* PasswordStrongView.swift */; };
 		0EC785A42AF0F8ED00F25636 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC785A32AF0F8ED00F25636 /* SuccessView.swift */; };
+		0EC785ED2AF2384A00F25636 /* EmailStrongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC785EC2AF2384A00F25636 /* EmailStrongView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		0E7E46892AF00C0600446561 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0E7E46902AF03D6D00446561 /* PasswordStrongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrongView.swift; sourceTree = "<group>"; };
 		0EC785A32AF0F8ED00F25636 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		0EC785EC2AF2384A00F25636 /* EmailStrongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailStrongView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				0E7E46842AF00C0500446561 /* ContentView.swift */,
 				0EC785A32AF0F8ED00F25636 /* SuccessView.swift */,
 				0E7E46902AF03D6D00446561 /* PasswordStrongView.swift */,
+				0EC785EC2AF2384A00F25636 /* EmailStrongView.swift */,
 				0E7E46862AF00C0600446561 /* Assets.xcassets */,
 				0E7E46882AF00C0600446561 /* Preview Content */,
 			);
@@ -147,6 +150,7 @@
 				0E7E46912AF03D6D00446561 /* PasswordStrongView.swift in Sources */,
 				0E7E46852AF00C0500446561 /* ContentView.swift in Sources */,
 				0E7E46832AF00C0500446561 /* Mentoring_ExampleApp.swift in Sources */,
+				0EC785ED2AF2384A00F25636 /* EmailStrongView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
