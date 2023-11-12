@@ -9,16 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var email:String = ""
+    @State var email: String = ""
     @State var password: String = ""
-    //비밀번호와 이메일이 맞게 작성됐는지 확인
+    ///비밀번호와 이메일이 맞게 작성됐는지 확인
     @State private var isEmailValid = false
     @State private var isPasswordValid = false
     @State private var showPassword = false
-    //버튼 활성화
-    @State private var ButtonToggle = false
+    ///버튼 활성화
+    //    @State private var buttonToggle = false
     @State private var loginValid = false
-    //팝업띄우기
+    ///팝업띄우기
     @State private var showingAlert = false
     @State private var nextView = false
     
@@ -26,8 +26,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack()
-            {
+            ZStack() {
                 VStack {
                     Rectangle()
                         .fill(Color.clear)
@@ -37,18 +36,14 @@ struct ContentView: View {
                         .edgesIgnoringSafeArea(.bottom)
                 }
                 
-                VStack(alignment: .leading, spacing: 40)
-                {
-                    
+                VStack(alignment: .leading, spacing: 40) {
                     Spacer()
                     Text("Hello \nWorld!")
                         .font(.system(size: 45))
                         .bold()
-                    VStack(alignment: .leading, spacing: 5)
-                    {
+                    VStack(alignment: .leading, spacing: 5) {
                         Text("이메일")
                             .font(.headline)
-                        
                         HStack {
                             TextField("이메일을 입력해주세요", text: $email)
                                 .onChange(of: email) {
@@ -69,20 +64,16 @@ struct ContentView: View {
                             Text("이메일을 올바르게 입력해주세요")
                                 .foregroundColor(.red)
                         }
-    
                     }
                     VStack(alignment: .leading, spacing: 5) {
                         Text("비밀번호")
                         HStack {
                             if showPassword {
                                 TextField("비밀번호를 입력해주세요", text: $password)
-                                    .onChange(of: password){
-                                        
-                                    }
+                                    .onChange(of: password){ }
                             } else {
                                 SecureField("비밀번호를 입력해주세요", text: $password)
                                     .onChange(of: password){
-                                        
                                     }
                             }
                             
@@ -107,8 +98,6 @@ struct ContentView: View {
                     Button {
                         //아이디 비번 일치하는지 확인하는 함수호출
                         LoginValid(email,password)
-                        print(email,password)
-                        
                         if isEmailValid && isPasswordValid {
                             nextView = true
                             print("로그인 성공")
@@ -117,29 +106,28 @@ struct ContentView: View {
                             self.showingAlert.toggle()
                             password = ""
                         }
-                        
                     }
-                    label : {
-                        if ButtonValid() {
-                            Text("로그인")
-                                .fontWeight(.bold)
-                                .frame(maxWidth: .infinity, minHeight: 50)
-                                .background(.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(5)
-                        } else {
-                            Text("로그인")
-                                .fontWeight(.bold)
-                                .frame(maxWidth: .infinity, minHeight: 50)
-                                .background(.gray)
-                                .foregroundColor(.white)
-                                .cornerRadius(5)
-                        }
+                label: {
+                    if ButtonValid() {
+                        Text("로그인")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(5)
+                    } else {
+                        Text("로그인")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(5)
                     }
-                    .disabled(!ButtonValid())
-                    .alert(isPresented: $showingAlert){
-                        Alert(title: Text("경고"), message: Text("아이디 혹은 비밀번호가 맞지 않습니다."))
-                    }
+                }
+                .disabled(!ButtonValid())
+                .alert(isPresented: $showingAlert){
+                    Alert(title: Text("경고"), message: Text("아이디 혹은 비밀번호가 맞지 않습니다."))
+                }
                     
                     Spacer()
                     Spacer()

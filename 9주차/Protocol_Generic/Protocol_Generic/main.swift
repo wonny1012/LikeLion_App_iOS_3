@@ -797,3 +797,10 @@ struct Stack11<T>: Container {
         return items[i]
     }
 }
+
+
+func printArray<T>(array:[T]) {
+    for number in array {
+        print(number)
+    }
+}
