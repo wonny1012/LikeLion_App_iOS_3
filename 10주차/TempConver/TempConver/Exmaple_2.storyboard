@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller ex2-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="ViewController_ex2" customModule="TempConver" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgb-7q-nBa">
+                                <rect key="frame" x="46.666666666666657" y="75" width="300" height="300"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="mickey.png" translatesAutoresizingMaskIntoConstraints="NO" id="CXx-fJ-zOM">
+                                        <rect key="frame" x="16" y="96" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="k7W-uO-10E"/>
+                                            <constraint firstAttribute="height" constant="80" id="xef-ro-FnK"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="mickey.png" translatesAutoresizingMaskIntoConstraints="NO" id="7Kz-Iy-ZEc">
+                                        <rect key="frame" x="110" y="96" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="Ccy-kn-lv2"/>
+                                            <constraint firstAttribute="width" constant="80" id="n1F-l7-8BQ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="mickey.png" translatesAutoresizingMaskIntoConstraints="NO" id="gbn-Va-tnP">
+                                        <rect key="frame" x="211" y="96" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="LUf-7P-J5K"/>
+                                            <constraint firstAttribute="width" constant="80" id="oiG-Oo-kyw"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="mickey.png" translatesAutoresizingMaskIntoConstraints="NO" id="ChY-RE-HjO">
+                                        <rect key="frame" x="210" y="184" width="80.000000000000028" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="odK-MQ-lmO"/>
+                                            <constraint firstAttribute="height" constant="80" id="xBH-7u-glp"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="mickey.png" translatesAutoresizingMaskIntoConstraints="NO" id="FDV-nf-Pc1">
+                                        <rect key="frame" x="16" y="184" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="PnC-Yo-4pd"/>
+                                            <constraint firstAttribute="width" constant="80" id="VfO-kL-CIp"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="mickey.png" translatesAutoresizingMaskIntoConstraints="NO" id="6cM-MZ-Cm5">
+                                        <rect key="frame" x="109" y="184" width="80.000000000000028" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="Bno-XA-ITE"/>
+                                            <constraint firstAttribute="height" constant="80" id="xik-i4-sU9"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mickey.png" translatesAutoresizingMaskIntoConstraints="NO" id="6dF-gd-7nw">
+                                        <rect key="frame" x="110" y="8" width="80.000000000000028" height="80"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="1Ka-8H-9y9"/>
+                                    <constraint firstItem="CXx-fJ-zOM" firstAttribute="leading" secondItem="Qgb-7q-nBa" secondAttribute="leading" constant="16" id="6AM-RS-bkR"/>
+                                    <constraint firstItem="6cM-MZ-Cm5" firstAttribute="centerX" secondItem="6dF-gd-7nw" secondAttribute="centerX" id="7uq-f8-Gps"/>
+                                    <constraint firstAttribute="width" constant="300" id="BMg-rb-8wf"/>
+                                    <constraint firstItem="FDV-nf-Pc1" firstAttribute="leading" secondItem="Qgb-7q-nBa" secondAttribute="leading" constant="16" id="MBu-97-YcT"/>
+                                    <constraint firstItem="7Kz-Iy-ZEc" firstAttribute="centerX" secondItem="6dF-gd-7nw" secondAttribute="centerX" id="wKR-SF-vJs"/>
+                                    <constraint firstItem="6dF-gd-7nw" firstAttribute="top" secondItem="Qgb-7q-nBa" secondAttribute="top" constant="6" id="yFa-Ht-ECx"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2SQ-Kd-lki">
+                                <rect key="frame" x="16" y="752" width="361" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Xw-kj-z1b">
+                                        <rect key="frame" x="143" y="7.6666666666666856" width="75" height="35"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVv-Iy-5qJ">
+                                        <rect key="frame" x="8" y="7.6666666666666288" width="75" height="35"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MyA-np-2VO">
+                                        <rect key="frame" x="278" y="7.6666666666666288" width="75" height="35"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="MyA-np-2VO" firstAttribute="centerY" secondItem="2SQ-Kd-lki" secondAttribute="centerY" id="bHt-kg-VIi"/>
+                                    <constraint firstItem="HVv-Iy-5qJ" firstAttribute="centerY" secondItem="2SQ-Kd-lki" secondAttribute="centerY" id="ghl-yk-Gq3"/>
+                                    <constraint firstItem="8Xw-kj-z1b" firstAttribute="centerX" secondItem="2SQ-Kd-lki" secondAttribute="centerX" id="lrD-z9-nBv"/>
+                                    <constraint firstAttribute="trailing" secondItem="MyA-np-2VO" secondAttribute="trailing" constant="8" id="sLA-H7-goX"/>
+                                    <constraint firstAttribute="height" constant="50" id="uhL-rk-elc"/>
+                                    <constraint firstItem="HVv-Iy-5qJ" firstAttribute="leading" secondItem="2SQ-Kd-lki" secondAttribute="leading" constant="8" id="ztP-Vn-maS"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2SQ-Kd-lki" secondAttribute="bottom" constant="16" id="aPq-bc-Ydq"/>
+                            <constraint firstItem="Qgb-7q-nBa" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="e5p-4Y-I1K"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2SQ-Kd-lki" secondAttribute="trailing" constant="16" id="jip-Uf-jxc"/>
+                            <constraint firstItem="Qgb-7q-nBa" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="np9-Nh-M2n"/>
+                            <constraint firstItem="2SQ-Kd-lki" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="ujF-2Q-8AE"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32.824427480916029" y="18.30985915492958"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="mickey.png" width="387" height="399"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
