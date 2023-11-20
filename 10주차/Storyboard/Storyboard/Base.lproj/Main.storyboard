@@ -80,7 +80,13 @@
                             <constraint firstItem="PxV-QW-kkW" firstAttribute="leading" secondItem="DaR-v3-kAw" secondAttribute="trailing" constant="60" id="y3k-4h-gIO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="5qL-tF-hCQ"/>
+                    <navigationItem key="navigationItem" title="Title" id="5qL-tF-hCQ">
+                        <barButtonItem key="rightBarButtonItem" title="다음" id="SDw-mm-V3w">
+                            <connections>
+                                <segue destination="n1b-mu-XQK" kind="show" id="1fU-cy-Pro"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imgView" destination="tTg-jh-frF" id="raI-RJ-Xey"/>
                         <outlet property="pageControl" destination="3IK-VG-aSX" id="0tY-tS-Nlw"/>
@@ -202,6 +208,9 @@
             <point key="canvasLocation" x="87.786259541984734" y="-6.3380281690140849"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="1fU-cy-Pro"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
