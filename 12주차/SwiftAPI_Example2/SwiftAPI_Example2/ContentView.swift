@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject var network = PapagoAPI.shared
-    @State var sourceString = "난 이 점수 만족 아닐세 "
+    @State var sourceString = "안녕하십니까~"
 
        var body: some View {
            VStack {
