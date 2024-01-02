@@ -17,4 +17,12 @@
     <td>4주차</td>
     <td>재귀함수 자료구조(Stack,Queue), 알고리즘(이진,단순탐색 / 버블,선택,퀵정렬)</td>
     </tr>
+    <tr align="center">
+    <td>5주차</td>
+    <td></td>
+    </tr>
+    <tr align="center">
+    <td>6주차</td>
+    <td></td>
+    </tr>
     
