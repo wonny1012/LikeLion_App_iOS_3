@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>OFFICE_SERVICE_KEY</key>
+	<string>Zs7e6gNIU8pko71%2FM9aN98zozZHlpv40xCejSPXmAX6x2uwP6WEL5g9WZwkosvCpZUpRqh1Mfcme6O%2FuAsIQKA%3D%3D</string>
 	<key>API_KEY</key>
 	<string>72e3a65181844e50881bf51bc6a8ad2c</string>
 </dict>
