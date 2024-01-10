@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NAVER_GEOCODE_SECRET</key>
+	<string>N3h71KYvqpRaAe9gy9PQEBeZ9gcxwdnAQAtJidW3</string>
+	<key>NAVER_GEOCODE_ID</key>
+	<string>fz9erjl206</string>
 	<key>OFFICE_SERVICE_KEY</key>
 	<string>Zs7e6gNIU8pko71%2FM9aN98zozZHlpv40xCejSPXmAX6x2uwP6WEL5g9WZwkosvCpZUpRqh1Mfcme6O%2FuAsIQKA%3D%3D</string>
 	<key>API_KEY</key>

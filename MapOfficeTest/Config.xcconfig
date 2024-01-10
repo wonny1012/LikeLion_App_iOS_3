@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  MapOfficeTest
+//
+//  Created by kwon ji won on 1/10/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+//https://hsungjin.github.io/NaverMap/
+
+NMFClientId = 90gsudzspg

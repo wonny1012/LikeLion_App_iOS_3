@@ -14,6 +14,9 @@
 		0EE39C9D2B4D3531005892C8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EE39C9C2B4D3531005892C8 /* ApiKeys.plist */; };
 		0EE39C9F2B4D35B0005892C8 /* OfficeServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE39C9E2B4D35B0005892C8 /* OfficeServiceAPI.swift */; };
 		0EE39CA12B4D376D005892C8 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE39CA02B4D376D005892C8 /* ApiKeys.swift */; };
+		0EE39CA92B4DBB77005892C8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE39CA82B4DBB77005892C8 /* MapView.swift */; };
+		0EE39CAB2B4DBBCD005892C8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE39CAA2B4DBBCD005892C8 /* Coordinator.swift */; };
+		BAA0B6BEADB400E78A41A10F /* Pods_MapOfficeTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4278376448968BF593725FEB /* Pods_MapOfficeTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,12 @@
 		0EE39C9E2B4D35B0005892C8 /* OfficeServiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeServiceAPI.swift; sourceTree = "<group>"; };
 		0EE39CA02B4D376D005892C8 /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		0EE39CA42B4D7CE5005892C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0EE39CA72B4DB754005892C8 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		0EE39CA82B4DBB77005892C8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		0EE39CAA2B4DBBCD005892C8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		35EE3CB61811EF9ADE946DB1 /* Pods-MapOfficeTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapOfficeTest.debug.xcconfig"; path = "Target Support Files/Pods-MapOfficeTest/Pods-MapOfficeTest.debug.xcconfig"; sourceTree = "<group>"; };
+		4278376448968BF593725FEB /* Pods_MapOfficeTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapOfficeTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5385E9A4459C5C075B2AF8DD /* Pods-MapOfficeTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapOfficeTest.release.xcconfig"; path = "Target Support Files/Pods-MapOfficeTest/Pods-MapOfficeTest.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA0B6BEADB400E78A41A10F /* Pods_MapOfficeTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,8 +52,11 @@
 		0EE39C812B4D0695005892C8 = {
 			isa = PBXGroup;
 			children = (
+				0EE39CA72B4DB754005892C8 /* Config.xcconfig */,
 				0EE39C8C2B4D0695005892C8 /* MapOfficeTest */,
 				0EE39C8B2B4D0695005892C8 /* Products */,
+				E0A50B2DB4F7BE8147A7FB84 /* Pods */,
+				1809A8C8213BB7E3EEA37CC9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +77,7 @@
 				0EE39C8F2B4D0695005892C8 /* ContentView.swift */,
 				0EE39C9E2B4D35B0005892C8 /* OfficeServiceAPI.swift */,
 				0EE39CA02B4D376D005892C8 /* ApiKeys.swift */,
+				0EE39CAC2B4E7F3B005892C8 /* etc */,
 				0EE39C912B4D0697005892C8 /* Assets.xcassets */,
 				0EE39C932B4D0697005892C8 /* Preview Content */,
 			);
@@ -78,6 +92,32 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		0EE39CAC2B4E7F3B005892C8 /* etc */ = {
+			isa = PBXGroup;
+			children = (
+				0EE39CA82B4DBB77005892C8 /* MapView.swift */,
+				0EE39CAA2B4DBBCD005892C8 /* Coordinator.swift */,
+			);
+			path = etc;
+			sourceTree = "<group>";
+		};
+		1809A8C8213BB7E3EEA37CC9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4278376448968BF593725FEB /* Pods_MapOfficeTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E0A50B2DB4F7BE8147A7FB84 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				35EE3CB61811EF9ADE946DB1 /* Pods-MapOfficeTest.debug.xcconfig */,
+				5385E9A4459C5C075B2AF8DD /* Pods-MapOfficeTest.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,9 +125,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EE39C982B4D0697005892C8 /* Build configuration list for PBXNativeTarget "MapOfficeTest" */;
 			buildPhases = (
+				17086B2F84B3F1D6D659DF7C /* [CP] Check Pods Manifest.lock */,
 				0EE39C862B4D0695005892C8 /* Sources */,
 				0EE39C872B4D0695005892C8 /* Frameworks */,
 				0EE39C882B4D0695005892C8 /* Resources */,
+				F7457543CCE31922AB1AD11D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,6 +186,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		17086B2F84B3F1D6D659DF7C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MapOfficeTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7457543CCE31922AB1AD11D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MapOfficeTest/Pods-MapOfficeTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MapOfficeTest/Pods-MapOfficeTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MapOfficeTest/Pods-MapOfficeTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0EE39C862B4D0695005892C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -151,6 +235,8 @@
 			files = (
 				0EE39C902B4D0695005892C8 /* ContentView.swift in Sources */,
 				0EE39C9F2B4D35B0005892C8 /* OfficeServiceAPI.swift in Sources */,
+				0EE39CAB2B4DBBCD005892C8 /* Coordinator.swift in Sources */,
+				0EE39CA92B4DBB77005892C8 /* MapView.swift in Sources */,
 				0EE39CA12B4D376D005892C8 /* ApiKeys.swift in Sources */,
 				0EE39C8E2B4D0695005892C8 /* MapOfficeTestApp.swift in Sources */,
 			);
@@ -196,7 +282,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -259,7 +345,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -280,6 +366,7 @@
 		};
 		0EE39C992B4D0697005892C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35EE3CB61811EF9ADE946DB1 /* Pods-MapOfficeTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -312,6 +399,7 @@
 		};
 		0EE39C9A2B4D0697005892C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5385E9A4459C5C075B2AF8DD /* Pods-MapOfficeTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
