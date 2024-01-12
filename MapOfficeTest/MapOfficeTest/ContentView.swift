@@ -6,12 +6,14 @@
 //
 // 코코아팟 설치하기 https://seons-dev.tistory.com/entry/%EC%99%95-%EC%B4%88%EB%B3%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-CocoaPods%EC%BD%94%EC%BD%94%EC%95%84%ED%8C%9F-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC
 //https://jeong9216.tistory.com/1981
+
 import SwiftUI
 import MapKit
 import CoreLocation
 import NMapsMap
 
 struct ContentView: View {
+    //StateObject : UI와 ObserveavbleObject를 연결해주는 역할
     @StateObject var network = OfficeInfoServiceAPI.shared
     @StateObject var coordinator: Coordinator = Coordinator.shared
     @StateObject var naverGeocodeAPI = NaverGeocodeAPI.shared
@@ -25,7 +27,7 @@ struct ContentView: View {
                 NavigationStack {
                     Button("주소")
                     {
-                        naverGeocodeAPI.fetchData("서울특별시 중구 충무로1가 21-1")
+                        naverGeocodeAPI.fetchLocationForPostalCode("서울특별시 중구 충무로1가 21-1")
                     }
                     List {
                         Text(network.resultMessage ?? "")
@@ -36,8 +38,10 @@ struct ContentView: View {
                                     updateMarkers() // 선택된 우체국이 변경될 때마다 마커 업데이트
                                 }) {
                                     VStack {
-                                        Text(result.name)
-                                        Text(result.address)
+                                        HStack {
+                                            Text(result.name)
+                                        }
+                                        
                                     }
                                 }
                                 
