@@ -17,63 +17,62 @@ struct ContentView: View {
     @StateObject var network = OfficeInfoServiceAPI.shared
     @StateObject var coordinator: Coordinator = Coordinator.shared
     @StateObject var naverGeocodeAPI = NaverGeocodeAPI.shared
-    @State var selectedOffice: OfficeInfo?
-    @State var coord: (Double, Double) = (126.9784147, 37.5666805)
+    @StateObject var combinedAPI = CombinedAPIService.shared
     @State var markers: [NMFMarker] = []
+    @State var coord: (Double, Double) = (126.9784147, 37.5666805)
+    
     
     var body: some View {
         ZStack {
             VStack {
                 NavigationStack {
-                    Button("주소")
-                    {
-                        naverGeocodeAPI.fetchLocationForPostalCode("서울특별시 중구 충무로1가 21-1")
-                    }
                     List {
-                        Text(network.resultMessage ?? "")
                         ForEach(network.posts, id: \.self) { result in
-                            HStack {
-                                Button(action: {
-                                    selectedOffice = result
-                                    updateMarkers() // 선택된 우체국이 변경될 때마다 마커 업데이트
-                                }) {
                                     VStack {
                                         HStack {
-                                            Text(result.name)
+                                            Button(result.name)
+                                            {
+                                                naverGeocodeAPI.fetchLocationForPostalCode(result.address) { latitude, longitude in
+                                                    if let latitude = latitude, let longitude = longitude {
+                                                        // 업데이트 로직을 여기에 추가하십시오.
+                                                        // 예를 들어, 선택된 위치를 업데이트하고 지도에 마커를 표시할 수 있습니다.
+//                                                        selectedOffice = result
+                                                        coord = (longitude, latitude)
+                                                        updateMarkers(latigude: coord.0, longtitude: coord.1)
+                                                        UIMapView(coord: coord, markers: markers)
+                                                    }
+                                                }
+                                            }
                                         }
                                         
                                     }
-                                }
-                                
-                            }
                         }
                     }
                 }
                 .onAppear() {
                     network.fetchData()
+//                    address.fetchData()
                     
                 }
                 .zIndex(1)
-                UIMapView(coord: (selectedOffice?.latitude ?? 126.9784147, selectedOffice?.longitude ?? 37.5666805), markers: markers)
+                UIMapView(coord: (Double(naverGeocodeAPI.targetLocation?.latitude ?? "126.9784147") ?? 126.9784147, Double(naverGeocodeAPI.targetLocation?.longitude ?? "37.5666805") ?? 37.5666805), markers: markers)
+
             }
         }
     }
     
-    private func updateMarkers() {
-        guard let selectedOffice = selectedOffice else {
-            return
-        }
-        
+    private func updateMarkers(latigude: Double, longtitude: Double) {
+
         // 기존 마커 제거
         markers.forEach { marker in
             marker.mapView = nil
         }
         markers.removeAll()
         
-        // 새로운 마커 추가
-        let marker = NMFMarker(position: NMGLatLng(lat: selectedOffice.latitude ?? 126.9784147, lng: selectedOffice.longitude ?? 37.5666805))
-        marker.mapView = NMFNaverMapView().mapView
-        markers.append(marker)
+//         새로운 마커 추가
+        let marker = NMFMarker(position: NMGLatLng(lat: coord.0, lng: coord.1))
+            marker.mapView = NMFNaverMapView().mapView
+                markers.append(marker)
     }
     
     
@@ -97,10 +96,10 @@ struct ContentView: View {
         
         func updateUIView(_ uiView: NMFNaverMapView, context: Context) {
             // 기존 마커 제거
-            //                    uiView.mapView.clear
+//                                uiView.mapView.clear()
             
             // 선택된 우체국의 좌표로 지도 중심 이동
-            let updatedCoord = NMGLatLng(lat: coord.1, lng: coord.0)
+            let updatedCoord = NMGLatLng(lat: coord.0, lng: coord.1)
             let cameraUpdate = NMFCameraUpdate(scrollTo: updatedCoord)
             cameraUpdate.animation = .fly
             cameraUpdate.animationDuration = 1

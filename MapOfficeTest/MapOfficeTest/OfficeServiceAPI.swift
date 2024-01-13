@@ -52,7 +52,7 @@ struct Address: Decodable {
 }
 
 //내가 정말 필요한 값 주소, 위도, 경도
-struct CombinedResult: Decodable {
+struct CombinedResult: Decodable, Hashable {
     let latitude: String
     let longitude: String
     let address: String
@@ -114,6 +114,7 @@ class OfficeInfoServiceAPI: ObservableObject {
                     //상단에서 세부 사항인 result.data부분을 따로 post로 저장
                     self.posts = results.data
                 }
+//                print(results)
             } catch let error {
                 print(error.localizedDescription)
             }
@@ -140,7 +141,7 @@ class NaverGeocodeAPI: ObservableObject {
         get { getValueOfPlistFile("ApiKeys", "NAVER_GEOCODE_SECRET") }
     }
     
-    func fetchLocationForPostalCode(_ postalCode: String) {
+    func fetchLocationForPostalCode(_ postalCode: String,  completion: @escaping (Double?, Double?) -> Void) {
         guard let clientID = clientID else { return }
         guard let clinetSecret = clinetSecret else { return }
         
@@ -183,14 +184,15 @@ class NaverGeocodeAPI: ObservableObject {
                 //바뀌어야 하는 부분, 여기서 x,y를 불러와도 된다
                 
                 if let firstAddress = geocodeResult.addresses.first {
-                    let latitude = firstAddress.y
-                    let longitude = firstAddress.x
+                    let latitude = Double(firstAddress.y)!
+                    let longitude = Double(firstAddress.x)!
                     
                     print("Latitude: \(latitude), Longitude: \(longitude)")
                     
                     //메인 스레드에서 UI를 업데이트 한다.
                     DispatchQueue.main.async {
-                        self.targetLocation = (latitude: latitude, longitude: longitude)
+                        //                        self.targetLocation = (latitude: latitude, longitude: longitude)
+                        completion(latitude,longitude)
                     }
                 }
             }
@@ -205,30 +207,29 @@ class NaverGeocodeAPI: ObservableObject {
 
 class CombinedAPIService: ObservableObject {
     @Published var combinedResults = [CombinedResult]()
+    static let shared = CombinedAPIService()
     
     func fetchData() {
         // 두 API에서 데이터를 가져와서 다음 변수에 저장한 것으로 가정합니다.
                let officeInfoResults = OfficeInfoServiceAPI.shared.posts
-               let naverGeocodeResult = NaverGeocodeAPI.shared.targetLocation
+        let naverGeocodeResult = NaverGeocodeAPI.shared.targetLocation
         
         // 가져온 데이터를 순회하면서 CombinedResult 객체를 생성합니다.
-        for officeInfo in officeInfoResults {
+        for (_,officeInfo) in officeInfoResults.enumerated() {
             if let latitude = naverGeocodeResult?.latitude,
                let longitude = naverGeocodeResult?.longitude {
-                let combinedResult = CombinedResult(latitude: String(latitude), longitude: String(longitude), address: officeInfo.address)
+                
+                let combinedResult = CombinedResult(
+                    latitude: String(latitude),
+                    longitude: String(longitude),
+                    address: officeInfo.address
+                )
                 combinedResults.append(combinedResult)
             }
+            print(combinedResults)
+            print("!!!!!!!!!!!!!!!!!!!")
         }
 
-        // 네이버 지오코드 API 결과가 있는 경우, 그것도 결합된 결과에 추가합니다.
-//        if let naverGeocodeResult = naverGeocodeResult {
-//            let combinedResult = CombinedResult(
-//                latitude: naverGeocodeResult.latitude,
-//                longitude: naverGeocodeResult.longitude,
-//                address: "N/A" // 네이버 지오코드 API에서 더 의미 있는 주소를 사용하도록 조정할 수 있습니다.
-//            )
-//            combinedResults.append(combinedResult)
-//        }
         print(combinedResults)
     }
 }
