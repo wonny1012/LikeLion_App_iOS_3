@@ -8,6 +8,7 @@
 import Foundation
 import NMapsMap
 import CoreLocation
+import SwiftUI
 
 //공공데이터 API를 담은 구조체
 
@@ -233,3 +234,5 @@ class CombinedAPIService: ObservableObject {
         print(combinedResults)
     }
 }
+
+

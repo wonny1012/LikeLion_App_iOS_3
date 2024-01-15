@@ -16,16 +16,20 @@ class Coordinator: NSObject, ObservableObject,
                          NMFMapViewCameraDelegate,
                          NMFMapViewTouchDelegate,
                          CLLocationManagerDelegate {
+    
     static let shared = Coordinator()
     
+    // 클래스 상단에 변수 설정을 해서 위치 정보 제공 동의함수를 사용
     @Published var coord: (Double, Double) = (0.0, 0.0)
     @Published var userLocation: (Double, Double) = (0.0, 0.0)
     
     var locationManager: CLLocationManager?
     let startInfoWindow = NMFInfoWindow()
     
+    
     let view = NMFNaverMapView(frame: .zero)
     
+    //coordinator 클래스 안의 콛 ㅡ
     override init() {
         super.init()
         
@@ -33,7 +37,7 @@ class Coordinator: NSObject, ObservableObject,
         view.mapView.isNightModeEnabled = true
         
         view.mapView.zoomLevel = 15 // 기본 맵이 표시될때 줌 레벨
-        view.mapView.minZoomLevel = 1 // 최소 줌 레벨
+        view.mapView.minZoomLevel = 10 // 최소 줌 레벨
         view.mapView.maxZoomLevel = 17 // 최대 줌 레벨
         
         view.showLocationButton = true // 현위치 버튼: 위치 추적 모드를 표현합니다. 탭하면 모드가 변경됩니다.
