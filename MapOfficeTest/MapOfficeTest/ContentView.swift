@@ -38,6 +38,9 @@ struct ContentView: View {
                                         naverGeocodeAPI.fetchLocationForPostalCode(result.address) { latitude, longitude in
                                             if let latitude = latitude, let longitude = longitude {
                                                 selectedLocation = NMGLatLng(lat: latitude, lng: longitude)
+                                                //클릭이 된다면 위,경도를 이용해서 위치를 보여준다.
+                                                //클릭할때마다 뷰를 바꿔줘야한다.
+                                                coordinator.fetchUserLocation(latitude: latitude, longitude: longitude)
                                             }
                                         }
                                     }
@@ -52,6 +55,7 @@ struct ContentView: View {
                     
                 }
                 .onAppear() {
+                    CLLocationManager().requestWhenInUseAuthorization()
                     network.fetchData()
                     
                 }

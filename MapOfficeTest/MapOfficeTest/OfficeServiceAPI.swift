@@ -63,7 +63,8 @@ struct CombinedResult: Decodable, Hashable {
 class OfficeInfoServiceAPI: ObservableObject {
     
     //클래스에서 State같은 느낌  ObservableObject -> StateObjecr
-    //shared -> StateObject
+    //shared -> 싱글톤의 일반적 패턴 -> 애플리케이션 전반에 걸쳐 공유된다.
+    //싱글톤 -> 클래스의 인스턴스를 단 하나만 생성하고 이에 대한 전역적인 액세스 지점을 제공하는 디자인 패턴
     static let shared = OfficeInfoServiceAPI()
     
     //class는 초기화가 필요하니까!

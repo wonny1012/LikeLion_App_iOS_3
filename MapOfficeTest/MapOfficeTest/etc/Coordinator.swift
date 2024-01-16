@@ -17,19 +17,24 @@ class Coordinator: NSObject, ObservableObject,
                          NMFMapViewTouchDelegate,
                          CLLocationManagerDelegate {
     
+    
+    //shared는 싱글톤
     static let shared = Coordinator()
     
     // 클래스 상단에 변수 설정을 해서 위치 정보 제공 동의함수를 사용
-    @Published var coord: (Double, Double) = (0.0, 0.0)
-    @Published var userLocation: (Double, Double) = (0.0, 0.0)
+    @Published var coord: (Double, Double) = (37.5626106, 126.9775524)
+    //지금 위치에 좌표 설정
+    @Published var userLocation: (Double, Double) = (37.5626106, 126.9775524)
     
+    //위치 정보를 관리하고, 사용자의 위치에 관련된 작업을 수행하는데 사용
     var locationManager: CLLocationManager?
+    //지도 위에 정보 창을 표시하는데 사용될 정보 창 객체
     let startInfoWindow = NMFInfoWindow()
     
-    
+    //네이버 지도를 표시하는 역할을 하는 뷰
     let view = NMFNaverMapView(frame: .zero)
     
-    //coordinator 클래스 안의 콛 ㅡ
+    //coordinator 클래스 안의 코드
     override init() {
         super.init()
         
@@ -70,6 +75,7 @@ class Coordinator: NSObject, ObservableObject,
      4. case .authorizedAlways(항상 허용), .authorizedWhenInUse(앱 사용중에만 허용) 일 경우에만 fetchUserLocation() 호출
      */
 
+    //인스턴스 메서드
     func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
         
@@ -80,13 +86,17 @@ class Coordinator: NSObject, ObservableObject,
             print("위치 정보 접근이 제한되었습니다.")
         case .denied:
             print("위치 정보 접근을 거절했습니다. 설정에 가서 변경하세요.")
-        case .authorizedAlways, .authorizedWhenInUse:
+        case .authorizedAlways, .authorizedAlways:
             print("Success")
             
             coord = (Double(locationManager.location?.coordinate.latitude ?? 0.0), Double(locationManager.location?.coordinate.longitude ?? 0.0))
-            userLocation = (Double(locationManager.location?.coordinate.latitude ?? 0.0), Double(locationManager.location?.coordinate.longitude ?? 0.0))
             
-            fetchUserLocation()
+//            userLocation = (Double(locationManager.location?.coordinate.latitude ?? 0.0), Double(locationManager.location?.coordinate.longitude ?? 0.0))
+            //임의값을 넣음
+            if let latitude = locationManager.location?.coordinate.latitude,
+                           let longitude = locationManager.location?.coordinate.longitude {
+                            fetchUserLocation(latitude: latitude, longitude: longitude)
+                        }
             
         @unknown default:
             break
@@ -99,6 +109,7 @@ class Coordinator: NSObject, ObservableObject,
                 DispatchQueue.main.async {
                     self.locationManager = CLLocationManager()
                     self.locationManager!.delegate = self
+                    self.locationManager!.requestWhenInUseAuthorization()
                     self.checkLocationAuthorization()
                 }
             } else {
@@ -106,18 +117,25 @@ class Coordinator: NSObject, ObservableObject,
             }
         }
     }
+    //센터를 이동한 뒤 마커를 찍는다. 
     
     // MARK: - NMFMapView에서 제공하는 locationOverlay를 현재 위치로 설정
-    func fetchUserLocation() {
+    func fetchUserLocation(latitude: Double, longitude: Double) {
+        //위치 정보를 관리하는 CLLocationManagerzm 클래스의 인스턴스
         if let locationManager = locationManager {
-            let lat = locationManager.location?.coordinate.latitude
-            let lng = locationManager.location?.coordinate.longitude
-            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat ?? 0.0, lng: lng ?? 0.0), zoomTo: 15)
+            //현재 위치의 위, 경도를 나타낸다.
+//            let lat = locationManager.location?.coordinate.latitude
+//            let lng = locationManager.location?.coordinate.longitude
+            
+//            print(lat,lng)
+            coord = (latitude,longitude)
+            
+            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude), zoomTo: 15)
             cameraUpdate.animation = .easeIn
             cameraUpdate.animationDuration = 1
             
             let locationOverlay = view.mapView.locationOverlay
-            locationOverlay.location = NMGLatLng(lat: lat ?? 0.0, lng: lng ?? 0.0)
+            locationOverlay.location = NMGLatLng(lat: latitude, lng: longitude)
             locationOverlay.hidden = false
             
             locationOverlay.icon = NMFOverlayImage(name: "location_overlay_icon")

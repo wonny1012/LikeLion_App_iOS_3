@@ -12,6 +12,7 @@ struct MapOfficeTestApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                
         }
     }
 }
