@@ -117,17 +117,16 @@ class Coordinator: NSObject, ObservableObject,
             }
         }
     }
-    //센터를 이동한 뒤 마커를 찍는다. 
+    //센터를 이동한 뒤 마커를 찍는다.
     
     // MARK: - NMFMapView에서 제공하는 locationOverlay를 현재 위치로 설정
     func fetchUserLocation(latitude: Double, longitude: Double) {
         //위치 정보를 관리하는 CLLocationManagerzm 클래스의 인스턴스
         if let locationManager = locationManager {
             //현재 위치의 위, 경도를 나타낸다.
-//            let lat = locationManager.location?.coordinate.latitude
-//            let lng = locationManager.location?.coordinate.longitude
+            let lat = latitude
+            let lng = longitude
             
-//            print(lat,lng)
             coord = (latitude,longitude)
             
             let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude), zoomTo: 15)
@@ -145,6 +144,23 @@ class Coordinator: NSObject, ObservableObject,
             
             view.mapView.moveCamera(cameraUpdate)
         }
+    }
+    
+    func fetchLocation(latitude: Double, longitude: Double) {
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude), zoomTo: 15)
+        cameraUpdate.animation = .easeIn
+        cameraUpdate.animationDuration = 1
+        let locationOverlay = view.mapView.locationOverlay
+        locationOverlay.location = NMGLatLng(lat: 37.5596209, lng: 126.9738099)
+        locationOverlay.hidden = true
+        
+        locationOverlay.icon = NMFOverlayImage(name: "figure.fall")
+        locationOverlay.iconWidth = CGFloat(NMF_LOCATION_OVERLAY_SIZE_AUTO)
+        locationOverlay.iconHeight = CGFloat(NMF_LOCATION_OVERLAY_SIZE_AUTO)
+        locationOverlay.anchor = CGPoint(x: 0.5, y: 1)
+        
+        view.mapView.moveCamera(cameraUpdate)
+        
     }
     
     func getNaverMapView() -> NMFNaverMapView {

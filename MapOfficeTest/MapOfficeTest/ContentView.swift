@@ -22,8 +22,6 @@ struct ContentView: View {
     //좌표를 찍기 위해 필요한값
     @State private var selectedLocation: NMGLatLng?
     @State var markers: [NMFMarker] = []
-    @State var coord: (Double, Double) = (126.9784147, 37.5666805)
-    
     
     var body: some View {
         ZStack {
@@ -33,14 +31,15 @@ struct ContentView: View {
                         ForEach(network.posts, id: \.self) { result in
                             VStack {
                                 HStack {
-                                    Button(result.name)
+                                    Button(result.address)
                                     {
                                         naverGeocodeAPI.fetchLocationForPostalCode(result.address) { latitude, longitude in
                                             if let latitude = latitude, let longitude = longitude {
                                                 selectedLocation = NMGLatLng(lat: latitude, lng: longitude)
+                                            
                                                 //클릭이 된다면 위,경도를 이용해서 위치를 보여준다.
                                                 //클릭할때마다 뷰를 바꿔줘야한다.
-                                                coordinator.fetchUserLocation(latitude: latitude, longitude: longitude)
+                                                coordinator.fetchLocation(latitude: latitude, longitude: longitude)
                                             }
                                         }
                                     }
@@ -49,7 +48,7 @@ struct ContentView: View {
                             }
                         }
                     }
-                    
+       
                     NaverMap()
                         .ignoresSafeArea(.all, edges: .top)
                     
