@@ -11,6 +11,11 @@ import CoreLocation
 import SwiftUI
 
 //공공데이터 API를 담은 구조체
+struct OfficeMainInfo: Decodable, Hashable {
+    
+}
+
+
 
 struct OfficeInfoResult: Decodable {
     let currentCount: Int
@@ -39,6 +44,8 @@ struct OfficeInfo: Decodable, Hashable {
     }
 }
 
+
+
 //NaverMap에서 만들어지는 구조체 / 주소를 위,경도로 바꾸는 값 포함
 struct GeocodeResponse: Decodable {
     let status: String
@@ -57,6 +64,68 @@ struct CombinedResult: Decodable, Hashable {
     let latitude: String
     let longitude: String
     let address: String
+}
+
+
+//우체국 메인 주서 API 불러오는 부분
+class OfficMaineInfoServiceAPI: ObservedObject {
+    static let shared = OfficMaineInfoServiceAPI()
+    
+    private init() { }
+    
+    @Published var infos = [OfficeMainInfo]()
+
+    private var apiKey: String? {
+        get { getValueOfPlistFile("ApiKeys", "OFFICE_MAIN_KEY")}
+    }
+    
+    //fetchData는 뭔가 시작할 때 불러오는 값 -> 클릭 되면 실행된다.
+    func fetchData() {
+        guard let apiKey = apiKey else { return }
+        
+        let urlString = "https://www.koreapost.go.kr/koreapost/openapi/searchPostScopeList.do?serviceKey=\(apiKey)&postLatitude=37.56&postLongitude=126.98&postGap=0.5&postDivType=1"
+//        "https://api.odcloud.kr/api/15070368/v1/uddi:cea8854d-35c4-4a7f-a100-f241ea289d76?page=1&perPage=10&returnType=JSON&serviceKey=\(apiKey)"
+        
+        //URL주소로 받아와 지면 값을 url로 저장해라
+        //url설정 부터 str까진 공통 작업
+        guard let url = URL(string: urlString) else { return }
+        
+        let session = URLSession(configuration: .default)
+        
+        let task = session.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
+            
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            let str2 = String(decoding: data, as: UTF8.self)
+            
+            print(str2)
+            
+            //가장 상단에 있는 OfficeInfoResult을 decode한다.
+            //내가 가지려고 하는건 data안에 있는 name, address -> OfficeInfo배열로 저장 되어있다.
+//            do {
+//                let results = try JSONDecoder().decode(OfficeMainInfo.self, from: data)
+//                DispatchQueue.main.async {
+//                    //상단에서 세부 사항인 result.data부분을 따로 post로 저장
+//                    self.infos = results.data
+//                }
+////                print(results)
+//            } catch let error {
+//                print(error.localizedDescription)
+//            }
+        }
+        //이건 뭘까?
+        task.resume()
+    }
+    
 }
 
 //우체국 주소 API를 불러오는 부분
@@ -176,7 +245,7 @@ class NaverGeocodeAPI: ObservableObject {
             }
             
             if let jsonString = String(data: data, encoding: .utf8) {
-//                print("API응답: \(jsonString)")
+                print("API응답: \(jsonString)")
             }
             
             //API응답시 파싱하기

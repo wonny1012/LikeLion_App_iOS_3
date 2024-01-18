@@ -39,7 +39,7 @@ struct ContentView: View {
                                             
                                                 //클릭이 된다면 위,경도를 이용해서 위치를 보여준다.
                                                 //클릭할때마다 뷰를 바꿔줘야한다.
-                                                coordinator.fetchLocation(latitude: latitude, longitude: longitude)
+                                                coordinator.fetchLocation(latitude: latitude, longitude: longitude, name: result.name)
                                             }
                                         }
                                     }
@@ -50,7 +50,31 @@ struct ContentView: View {
                     }
        
                     NaverMap()
+                    
                         .ignoresSafeArea(.all, edges: .top)
+                        .onAppear() {
+                            
+                            for result in network.posts {
+                                naverGeocodeAPI.fetchLocationForPostalCode(result.address) { 
+                                    latitude, longitude in
+                                    if let latitude = latitude, let longitude = longitude {
+                                        selectedLocation = NMGLatLng(lat: latitude, lng: longitude)
+                                        
+                                        let marker = NMFMarker()
+                                        let view = NMFNaverMapView(frame: .zero)
+                                        
+                                        let locationOverlay = view.mapView.locationOverlay
+                                        locationOverlay.hidden = true
+                                        marker.position = NMGLatLng(lat: latitude, lng: longitude)
+                                        marker.captionText = result.name
+                                        marker.mapView = view.mapView
+                                        print("Sucess")
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
                     
                 }
                 .onAppear() {

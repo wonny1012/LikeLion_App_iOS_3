@@ -7,6 +7,7 @@
 
 import UIKit
 import NMapsMap
+import SwiftUI
 
 // - NMFMapViewCameraDelegate 카메라 이동에 필요한 델리게이트,
 // - NMFMapViewTouchDelegate 맵 터치할 때 필요한 델리게이트,
@@ -23,11 +24,13 @@ class Coordinator: NSObject, ObservableObject,
     
     // 클래스 상단에 변수 설정을 해서 위치 정보 제공 동의함수를 사용
     @Published var coord: (Double, Double) = (37.5626106, 126.9775524)
+    
     //지금 위치에 좌표 설정
     @Published var userLocation: (Double, Double) = (37.5626106, 126.9775524)
     
     //위치 정보를 관리하고, 사용자의 위치에 관련된 작업을 수행하는데 사용
     var locationManager: CLLocationManager?
+    
     //지도 위에 정보 창을 표시하는데 사용될 정보 창 객체
     let startInfoWindow = NMFInfoWindow()
     
@@ -40,6 +43,7 @@ class Coordinator: NSObject, ObservableObject,
         
         view.mapView.positionMode = .direction
         view.mapView.isNightModeEnabled = true
+        
         
         view.mapView.zoomLevel = 15 // 기본 맵이 표시될때 줌 레벨
         view.mapView.minZoomLevel = 10 // 최소 줌 레벨
@@ -93,11 +97,11 @@ class Coordinator: NSObject, ObservableObject,
             
 //            userLocation = (Double(locationManager.location?.coordinate.latitude ?? 0.0), Double(locationManager.location?.coordinate.longitude ?? 0.0))
             //임의값을 넣음
-            if let latitude = locationManager.location?.coordinate.latitude,
-                           let longitude = locationManager.location?.coordinate.longitude {
-                            fetchUserLocation(latitude: latitude, longitude: longitude)
-                        }
-            
+//            if let latitude = locationManager.location?.coordinate.latitude,
+//                           let longitude = locationManager.location?.coordinate.longitude {
+//                            fetchUserLocation(latitude: latitude, longitude: longitude)
+//                        }
+//            
         @unknown default:
             break
         }
@@ -117,48 +121,32 @@ class Coordinator: NSObject, ObservableObject,
             }
         }
     }
-    //센터를 이동한 뒤 마커를 찍는다.
-    
+
     // MARK: - NMFMapView에서 제공하는 locationOverlay를 현재 위치로 설정
-    func fetchUserLocation(latitude: Double, longitude: Double) {
-        //위치 정보를 관리하는 CLLocationManagerzm 클래스의 인스턴스
-        if let locationManager = locationManager {
-            //현재 위치의 위, 경도를 나타낸다.
-            let lat = latitude
-            let lng = longitude
-            
-            coord = (latitude,longitude)
-            
-            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude), zoomTo: 15)
-            cameraUpdate.animation = .easeIn
-            cameraUpdate.animationDuration = 1
-            
-            let locationOverlay = view.mapView.locationOverlay
-            locationOverlay.location = NMGLatLng(lat: latitude, lng: longitude)
-            locationOverlay.hidden = false
-            
-            locationOverlay.icon = NMFOverlayImage(name: "location_overlay_icon")
-            locationOverlay.iconWidth = CGFloat(NMF_LOCATION_OVERLAY_SIZE_AUTO)
-            locationOverlay.iconHeight = CGFloat(NMF_LOCATION_OVERLAY_SIZE_AUTO)
-            locationOverlay.anchor = CGPoint(x: 0.5, y: 1)
-            
-            view.mapView.moveCamera(cameraUpdate)
-        }
-    }
     
-    func fetchLocation(latitude: Double, longitude: Double) {
+    func fetchLocation(latitude: Double, longitude: Double, name: String) {
+        let marker = NMFMarker()
+        
+        marker.mapView = nil
+        
+        //카메라가 옮겨지는 기능
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude), zoomTo: 15)
         cameraUpdate.animation = .easeIn
         cameraUpdate.animationDuration = 1
-        let locationOverlay = view.mapView.locationOverlay
-        locationOverlay.location = NMGLatLng(lat: 37.5596209, lng: 126.9738099)
-        locationOverlay.hidden = true
         
-        locationOverlay.icon = NMFOverlayImage(name: "figure.fall")
+        let locationOverlay = view.mapView.locationOverlay
+        locationOverlay.hidden = true
+        marker.position = NMGLatLng(lat: latitude, lng: longitude)
+
+        marker.captionText = name
+        
+        //다른 아이콘이 필요하다면 추가 할 것
+        //marker.iconImage = NMFOverlayImage(name: "marker_icon")
         locationOverlay.iconWidth = CGFloat(NMF_LOCATION_OVERLAY_SIZE_AUTO)
         locationOverlay.iconHeight = CGFloat(NMF_LOCATION_OVERLAY_SIZE_AUTO)
         locationOverlay.anchor = CGPoint(x: 0.5, y: 1)
-        
+
+        marker.mapView = view.mapView
         view.mapView.moveCamera(cameraUpdate)
         
     }
@@ -166,6 +154,25 @@ class Coordinator: NSObject, ObservableObject,
     func getNaverMapView() -> NMFNaverMapView {
         view
     }
-    
 
+    
+}
+
+
+// SwiftUI Image를 UIImage로 변환하는 확장 메서드
+extension Image {
+    func toUIImage() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        let view = controller.view
+        let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
+        view?.bounds = CGRect(origin: .zero, size: size)
+        view?.backgroundColor = .clear
+
+        let renderer = UIGraphicsImageRenderer(size: size)
+        let image = renderer.image { _ in
+            view?.drawHierarchy(in: view?.bounds ?? CGRect.zero, afterScreenUpdates: true)
+        }
+
+        return image
+    }
 }
