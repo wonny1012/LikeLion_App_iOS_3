@@ -18,6 +18,7 @@ class Coordinator: NSObject, ObservableObject,
                          NMFMapViewTouchDelegate,
                          CLLocationManagerDelegate {
     
+    var markers: [NMFMarker] = []
     
     //shared는 싱글톤
     static let shared = Coordinator()
@@ -42,8 +43,7 @@ class Coordinator: NSObject, ObservableObject,
         super.init()
         
         view.mapView.positionMode = .direction
-        view.mapView.isNightModeEnabled = true
-        
+        view.showZoomControls = false
         
         view.mapView.zoomLevel = 15 // 기본 맵이 표시될때 줌 레벨
         view.mapView.minZoomLevel = 10 // 최소 줌 레벨
@@ -58,8 +58,11 @@ class Coordinator: NSObject, ObservableObject,
         view.mapView.touchDelegate = self
         
     }
-
     
+    func getNaverMapView() -> NMFNaverMapView {
+        view
+    }
+
     func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
         // 카메라 이동이 시작되기 전 호출되는 함수
     }
@@ -78,49 +81,6 @@ class Coordinator: NSObject, ObservableObject,
      3. true일 경우(동의한 경우), checkLocationAuthorization() 호출
      4. case .authorizedAlways(항상 허용), .authorizedWhenInUse(앱 사용중에만 허용) 일 경우에만 fetchUserLocation() 호출
      */
-
-    //인스턴스 메서드
-    func checkLocationAuthorization() {
-        guard let locationManager = locationManager else { return }
-        
-        switch locationManager.authorizationStatus {
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            print("위치 정보 접근이 제한되었습니다.")
-        case .denied:
-            print("위치 정보 접근을 거절했습니다. 설정에 가서 변경하세요.")
-        case .authorizedAlways, .authorizedAlways:
-            print("Success")
-            
-            coord = (Double(locationManager.location?.coordinate.latitude ?? 0.0), Double(locationManager.location?.coordinate.longitude ?? 0.0))
-            
-//            userLocation = (Double(locationManager.location?.coordinate.latitude ?? 0.0), Double(locationManager.location?.coordinate.longitude ?? 0.0))
-            //임의값을 넣음
-//            if let latitude = locationManager.location?.coordinate.latitude,
-//                           let longitude = locationManager.location?.coordinate.longitude {
-//                            fetchUserLocation(latitude: latitude, longitude: longitude)
-//                        }
-//            
-        @unknown default:
-            break
-        }
-    }
-    
-    func checkIfLocationServiceIsEnabled() {
-        DispatchQueue.global().async {
-            if CLLocationManager.locationServicesEnabled() {
-                DispatchQueue.main.async {
-                    self.locationManager = CLLocationManager()
-                    self.locationManager!.delegate = self
-                    self.locationManager!.requestWhenInUseAuthorization()
-                    self.checkLocationAuthorization()
-                }
-            } else {
-                print("Show an alert letting them know this is off and to go turn i on")
-            }
-        }
-    }
 
     // MARK: - NMFMapView에서 제공하는 locationOverlay를 현재 위치로 설정
     
@@ -151,8 +111,41 @@ class Coordinator: NSObject, ObservableObject,
         
     }
     
-    func getNaverMapView() -> NMFNaverMapView {
-        view
+    
+    func TotalaLocation(latitude: Double, longitude: Double, name: String) {
+        let marker = NMFMarker()
+        
+        marker.mapView = nil
+        
+        let locationOverlay = view.mapView.locationOverlay
+        locationOverlay.hidden = true
+        marker.position = NMGLatLng(lat: latitude, lng: longitude)
+
+        marker.captionText = name
+        
+        //다른 아이콘이 필요하다면 추가 할 것
+        //marker.iconImage = NMFOverlayImage(name: "marker_icon")
+        locationOverlay.iconWidth = CGFloat(NMF_LOCATION_OVERLAY_SIZE_AUTO)
+        locationOverlay.iconHeight = CGFloat(NMF_LOCATION_OVERLAY_SIZE_AUTO)
+        locationOverlay.anchor = CGPoint(x: 0.5, y: 1)
+
+        marker.mapView = view.mapView
+//        view.mapView.moveCamera(cameraUpdate)
+        
+    }
+    
+    //마커 추가하기
+    func addMarkerAndInfoWindow(coord: NMGLatLng, caption: String = "", infoTitle: String = "") {
+        let marker = NMFMarker()
+        marker.position = coord
+        marker.captionText = caption
+        marker.mapView = view.mapView
+        markers.append(marker)
+        
+        let infoWindow = NMFInfoWindow()
+        let dataSource = NMFInfoWindowDefaultTextSource.data()
+        dataSource.title = infoTitle
+        infoWindow.dataSource = dataSource
     }
 
     

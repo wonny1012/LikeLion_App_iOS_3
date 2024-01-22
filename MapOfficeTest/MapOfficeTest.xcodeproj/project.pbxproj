@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E07779B2B5E38F200A223F0 /* XMLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 0E07779A2B5E38F200A223F0 /* XMLCoder */; };
+		0E29F0CA2B5E8293005B86FB /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F0C92B5E8293005B86FB /* NaverMap.swift */; };
+		0E29F0CC2B5E830E005B86FB /* MyCoord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29F0CB2B5E830E005B86FB /* MyCoord.swift */; };
 		0EE39C8E2B4D0695005892C8 /* MapOfficeTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE39C8D2B4D0695005892C8 /* MapOfficeTestApp.swift */; };
 		0EE39C902B4D0695005892C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE39C8F2B4D0695005892C8 /* ContentView.swift */; };
 		0EE39C922B4D0697005892C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EE39C912B4D0697005892C8 /* Assets.xcassets */; };
@@ -20,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E29F0C92B5E8293005B86FB /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
+		0E29F0CB2B5E830E005B86FB /* MyCoord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoord.swift; sourceTree = "<group>"; };
 		0EE39C8A2B4D0695005892C8 /* MapOfficeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapOfficeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EE39C8D2B4D0695005892C8 /* MapOfficeTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOfficeTestApp.swift; sourceTree = "<group>"; };
 		0EE39C8F2B4D0695005892C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E07779B2B5E38F200A223F0 /* XMLCoder in Frameworks */,
 				BAA0B6BEADB400E78A41A10F /* Pods_MapOfficeTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,6 +81,7 @@
 				0EE39C8D2B4D0695005892C8 /* MapOfficeTestApp.swift */,
 				0EE39C9C2B4D3531005892C8 /* ApiKeys.plist */,
 				0EE39C8F2B4D0695005892C8 /* ContentView.swift */,
+				0E29F0C92B5E8293005B86FB /* NaverMap.swift */,
 				0EE39C9E2B4D35B0005892C8 /* OfficeServiceAPI.swift */,
 				0EE39CA02B4D376D005892C8 /* ApiKeys.swift */,
 				0EE39CAC2B4E7F3B005892C8 /* etc */,
@@ -96,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE39CA82B4DBB77005892C8 /* MapView.swift */,
+				0E29F0CB2B5E830E005B86FB /* MyCoord.swift */,
 				0EE39CAA2B4DBBCD005892C8 /* Coordinator.swift */,
 			);
 			path = etc;
@@ -136,6 +144,9 @@
 			dependencies = (
 			);
 			name = MapOfficeTest;
+			packageProductDependencies = (
+				0E07779A2B5E38F200A223F0 /* XMLCoder */,
+			);
 			productName = MapOfficeTest;
 			productReference = 0EE39C8A2B4D0695005892C8 /* MapOfficeTest.app */;
 			productType = "com.apple.product-type.application";
@@ -164,6 +175,9 @@
 				Base,
 			);
 			mainGroup = 0EE39C812B4D0695005892C8;
+			packageReferences = (
+				0E0777992B5E38F200A223F0 /* XCRemoteSwiftPackageReference "XMLCoder" */,
+			);
 			productRefGroup = 0EE39C8B2B4D0695005892C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -236,7 +250,9 @@
 				0EE39C902B4D0695005892C8 /* ContentView.swift in Sources */,
 				0EE39C9F2B4D35B0005892C8 /* OfficeServiceAPI.swift in Sources */,
 				0EE39CAB2B4DBBCD005892C8 /* Coordinator.swift in Sources */,
+				0E29F0CA2B5E8293005B86FB /* NaverMap.swift in Sources */,
 				0EE39CA92B4DBB77005892C8 /* MapView.swift in Sources */,
+				0E29F0CC2B5E830E005B86FB /* MyCoord.swift in Sources */,
 				0EE39CA12B4D376D005892C8 /* ApiKeys.swift in Sources */,
 				0EE39C8E2B4D0695005892C8 /* MapOfficeTestApp.swift in Sources */,
 			);
@@ -450,6 +466,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0E0777992B5E38F200A223F0 /* XCRemoteSwiftPackageReference "XMLCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoreOffice/XMLCoder";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.17.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0E07779A2B5E38F200A223F0 /* XMLCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E0777992B5E38F200A223F0 /* XCRemoteSwiftPackageReference "XMLCoder" */;
+			productName = XMLCoder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0EE39C822B4D0695005892C8 /* Project object */;
 }

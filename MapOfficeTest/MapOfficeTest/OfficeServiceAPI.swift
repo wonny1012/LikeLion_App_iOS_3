@@ -9,13 +9,57 @@ import Foundation
 import NMapsMap
 import CoreLocation
 import SwiftUI
+import XMLCoder
 
 //공공데이터 API를 담은 구조체
-struct OfficeMainInfo: Decodable, Hashable {
+struct PostListResponse: Codable {
+    let postMsgHeader: PostMsgHeader
+    let postItems: [PostItem]
     
+    private enum CodingKeys: String, CodingKey {
+        case postMsgHeader
+        case postItems = "postItem"
+    }
 }
 
+struct PostMsgHeader: Codable {
+    let totalCount: Int
+    let pageCount: Int // 보여줄 아이템 수 : 최대 50
+    let totalPage : Int
+    let nowPage: Int
+}
 
+struct PostItem: Codable, Hashable {
+    let postId: Int
+    let postDiv: Int
+    let postNm: String
+    let postNmEn: String
+    let postTel: String
+    let postFax: String
+    let postAddr: String
+    let postAddrEn: String
+    let post365Yn: String
+    let postTime: String
+    let postFinanceTime: String
+    let postServiceTime: String?
+    let postLat: String
+    let postLon: String
+    let postSubWay: String
+    let postOffiId: Int
+    let fundSaleYn: String
+    let phoneSaleYn: String
+    let partTimeYn: String
+    let lunchTimeYn: String
+    let lunchTime: String?
+    let todayDepartureYn: String
+    let todayDepartureMailTime: String
+    let postDesc: String?
+    let modDt: String
+}
+
+//struct OfficeBoxInfo: Decodable, Hashable {
+//
+//}
 
 struct OfficeInfoResult: Decodable {
     let currentCount: Int
@@ -33,7 +77,7 @@ struct OfficeInfo: Decodable, Hashable {
     let postalCode: String
     let phoneNumber: String
     let address: String
-
+    
     
     //한글일 때 나타내는 표현
     enum CodingKeys: String, CodingKey {
@@ -67,14 +111,17 @@ struct CombinedResult: Decodable, Hashable {
 }
 
 
-//우체국 메인 주서 API 불러오는 부분
-class OfficMaineInfoServiceAPI: ObservedObject {
+//우체국 메인 주소 API 불러오는 부분
+class OfficMaineInfoServiceAPI: ObservableObject {
+    
     static let shared = OfficMaineInfoServiceAPI()
     
     private init() { }
     
-    @Published var infos = [OfficeMainInfo]()
-
+    @Published var infos = [PostItem]()
+    //이건 어디 필요한거지?
+    @Published var resultMessage: String?
+    
     private var apiKey: String? {
         get { getValueOfPlistFile("ApiKeys", "OFFICE_MAIN_KEY")}
     }
@@ -83,13 +130,14 @@ class OfficMaineInfoServiceAPI: ObservedObject {
     func fetchData() {
         guard let apiKey = apiKey else { return }
         
+        //postDivType 데이터 대상 null=전체대상, 1=우체국, 2=우체통
+        //postGap 반경 코드 1km = 1, 0.5km = 0.5
         let urlString = "https://www.koreapost.go.kr/koreapost/openapi/searchPostScopeList.do?serviceKey=\(apiKey)&postLatitude=37.56&postLongitude=126.98&postGap=0.5&postDivType=1"
-//        "https://api.odcloud.kr/api/15070368/v1/uddi:cea8854d-35c4-4a7f-a100-f241ea289d76?page=1&perPage=10&returnType=JSON&serviceKey=\(apiKey)"
+        //        "https://api.odcloud.kr/api/15070368/v1/uddi:cea8854d-35c4-4a7f-a100-f241ea289d76?page=1&perPage=10&returnType=JSON&serviceKey=\(apiKey)"
         
         //URL주소로 받아와 지면 값을 url로 저장해라
         //url설정 부터 str까진 공통 작업
         guard let url = URL(string: urlString) else { return }
-        
         let session = URLSession(configuration: .default)
         
         let task = session.dataTask(with: url) { data, response, error in
@@ -106,21 +154,18 @@ class OfficMaineInfoServiceAPI: ObservedObject {
             }
             
             let str2 = String(decoding: data, as: UTF8.self)
+
             
-            print(str2)
-            
-            //가장 상단에 있는 OfficeInfoResult을 decode한다.
-            //내가 가지려고 하는건 data안에 있는 name, address -> OfficeInfo배열로 저장 되어있다.
-//            do {
-//                let results = try JSONDecoder().decode(OfficeMainInfo.self, from: data)
-//                DispatchQueue.main.async {
-//                    //상단에서 세부 사항인 result.data부분을 따로 post로 저장
-//                    self.infos = results.data
-//                }
-////                print(results)
-//            } catch let error {
-//                print(error.localizedDescription)
-//            }
+            do {
+                let postListResponse = try XMLDecoder().decode(PostListResponse.self, from: data)
+                DispatchQueue.main.async {
+                    self.infos = postListResponse.postItems
+                }
+                print(postListResponse.postItems)
+//
+            } catch {
+                print(error)
+            }
         }
         //이건 뭘까?
         task.resume()
@@ -139,7 +184,7 @@ class OfficeInfoServiceAPI: ObservableObject {
     //class는 초기화가 필요하니까!
     private init() { }
     
-    //Published -> 값의 변화를 알려준다. 
+    //Published -> 값의 변화를 알려준다.
     //내가 불러올 값은 OfficeInfo에 있다.
     @Published var posts = [OfficeInfo]()
     //이건 어디 필요한거지?
@@ -185,7 +230,6 @@ class OfficeInfoServiceAPI: ObservableObject {
                     //상단에서 세부 사항인 result.data부분을 따로 post로 저장
                     self.posts = results.data
                 }
-//                print(results)
             } catch let error {
                 print(error.localizedDescription)
             }
@@ -234,6 +278,7 @@ class NaverGeocodeAPI: ObservableObject {
             }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                print("error!!!")
                 // 정상적으로 값이 오지 않았을 때 처리
                 //여기서 오류가 남
                 return
@@ -282,7 +327,7 @@ class CombinedAPIService: ObservableObject {
     
     func fetchData() {
         // 두 API에서 데이터를 가져와서 다음 변수에 저장한 것으로 가정합니다.
-               let officeInfoResults = OfficeInfoServiceAPI.shared.posts
+        let officeInfoResults = OfficeInfoServiceAPI.shared.posts
         let naverGeocodeResult = NaverGeocodeAPI.shared.targetLocation
         
         // 가져온 데이터를 순회하면서 CombinedResult 객체를 생성합니다.
@@ -300,7 +345,7 @@ class CombinedAPIService: ObservableObject {
             print(combinedResults)
             print("!!!!!!!!!!!!!!!!!!!")
         }
-
+        
         print(combinedResults)
     }
 }

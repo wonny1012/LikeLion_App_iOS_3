@@ -18,6 +18,7 @@ struct ContentView: View {
     @StateObject var coordinator: Coordinator = Coordinator.shared
     @StateObject var naverGeocodeAPI = NaverGeocodeAPI.shared
     @StateObject var combinedAPI = CombinedAPIService.shared
+    @StateObject var officMaineInfoServiceAPI = OfficMaineInfoServiceAPI.shared
     
     //좌표를 찍기 위해 필요한값
     @State private var selectedLocation: NMGLatLng?
@@ -28,62 +29,40 @@ struct ContentView: View {
             VStack {
                 NavigationStack {
                     List {
-                        ForEach(network.posts, id: \.self) { result in
+                        ForEach(officMaineInfoServiceAPI.infos, id: \.self) { result in
+//                            ForEach(network.posts, id: \.self) { result in
                             VStack {
                                 HStack {
-                                    Button(result.address)
+                                    Button(result.postNm)
                                     {
-                                        naverGeocodeAPI.fetchLocationForPostalCode(result.address) { latitude, longitude in
-                                            if let latitude = latitude, let longitude = longitude {
-                                                selectedLocation = NMGLatLng(lat: latitude, lng: longitude)
-                                            
-                                                //클릭이 된다면 위,경도를 이용해서 위치를 보여준다.
-                                                //클릭할때마다 뷰를 바꿔줘야한다.
-                                                coordinator.fetchLocation(latitude: latitude, longitude: longitude, name: result.name)
-                                            }
-                                        }
+                                        coordinator.fetchLocation(latitude: Double(result.postLat)!, longitude: Double(result.postLon)!, name: result.postNm)
                                     }
                                 }
                                 
                             }
                         }
                     }
-       
-                    NaverMap()
                     
+                    NaverMap()
                         .ignoresSafeArea(.all, edges: .top)
                         .onAppear() {
-                            
-                            for result in network.posts {
-                                naverGeocodeAPI.fetchLocationForPostalCode(result.address) { 
-                                    latitude, longitude in
-                                    if let latitude = latitude, let longitude = longitude {
-                                        selectedLocation = NMGLatLng(lat: latitude, lng: longitude)
-                                        
-                                        let marker = NMFMarker()
-                                        let view = NMFNaverMapView(frame: .zero)
-                                        
-                                        let locationOverlay = view.mapView.locationOverlay
-                                        locationOverlay.hidden = true
-                                        marker.position = NMGLatLng(lat: latitude, lng: longitude)
-                                        marker.captionText = result.name
-                                        marker.mapView = view.mapView
-                                        print("Sucess")
-                                    }
-                                    
-                                }
+                            for result in officMaineInfoServiceAPI.infos {
+                               let marker = NMFMarker()
+                                marker.position = NMGLatLng(lat: Double(result.postLat)!, lng: Double(result.postLon)!)
+                                print(marker.position)
+                                marker.mapView = NMFMapView(frame: .zero)
                             }
-                            
+
                         }
-                    
                 }
                 .onAppear() {
                     CLLocationManager().requestWhenInUseAuthorization()
                     network.fetchData()
+                    officMaineInfoServiceAPI.fetchData()
                     
                 }
                 .zIndex(1)
-           }
+            }
         }
     }
 }
